@@ -42,7 +42,7 @@ Add the dependency:
         super.onCreate(savedInstanceState);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        /*make an instance for */
+        /*make an instance */
         FormValidator formValidator = new FormValidator();
 
         /*You need to pass the root layout*/ 
