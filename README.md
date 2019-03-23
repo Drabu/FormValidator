@@ -46,7 +46,7 @@ Add the dependency:
         FormValidator formValidator = new FormValidator();
 
         /*You need to pass the root layout*/ 
-        /*create an OnResponseListener and attach to the method*/
+        /*You can call this method on form submit to get know if the user has filled all the fields*/
         formValidator.isFormValidated(this, activityMainBinding.mainLinearLayoutLL, false );
         }
 
