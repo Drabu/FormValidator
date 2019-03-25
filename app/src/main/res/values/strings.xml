@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FormValidationsExample</string>
+    <string name="fillTheForm">Please fill this form</string>
 </resources>
