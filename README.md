@@ -50,12 +50,8 @@ Add the dependency:
     override fun onClick(view: View) {
 
         when(view.id){
-            R.id.submitFormBTN -> {
-	    	
-                val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
-
-                FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL,
-	showErrors = true, optionalParams = optionalInput)
+            R.id.submitFormBTN -> {	
+              FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL)
             }
 
         }
@@ -63,7 +59,7 @@ Add the dependency:
     }
     
     override fun onResponse(isFormFilled: Boolean) {
-
+	// called once the evaluation is complete.	
         if (isFormFilled){
             /*Form is filled*/
             Toast.makeText(this, "Form is filled", Toast.LENGTH_LONG).show()
@@ -79,6 +75,18 @@ Add the dependency:
 
 
 
+In case you have optional parameters : 
+        
+ 	val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
+	FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL,
+	optionalParams = optionalInput)
+	
+
+If you want to show errors: 
+        
+	FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, 
+	showErrors = true)
+	
 
 Usage
 -----
