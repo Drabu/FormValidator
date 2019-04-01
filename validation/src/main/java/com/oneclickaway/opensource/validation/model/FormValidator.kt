@@ -11,7 +11,7 @@ import java.util.stream.IntStream
 class FormValidator {
 
     /*optional  arrays*/
-    fun isFormValidated(showErrors: Boolean, onResponseListener: OnResponseListener, viewGroup: ViewGroup, optionalParams: IntArray = intArrayOf()){
+    fun isFormValidated( viewGroup: ViewGroup, onResponseListener: OnResponseListener, showErrors: Boolean = false, optionalParams: IntArray = intArrayOf()){
         ValidateForm(optionalParams =optionalParams,  showErrors =  showErrors, onResponseListener =  onResponseListener).execute(viewGroup)
     }
 }
