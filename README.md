@@ -22,50 +22,66 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency: 
 
     dependencies {
-	        implementation 'com.github.Drabu:FormValidator:1.0.0'
+	         implementation 'com.github.Drabu:FormValidator:1.1.2'
 	 }
    
 
 
-#Example Java: 
+#Example Kotlin Class: 
 
     import com.oneclickaway.opensource.formvalidationsexample.databinding.ActivityMainBinding;
     import com.oneclickaway.opensource.validation.interfaces.OnResponseListener;
     import com.oneclickaway.opensource.validation.model.FormValidator;
-
-    public class MainActivity extends AppCompatActivity implements OnResponseListener {
-  
-    ActivityMainBinding activityMainBinding;
     
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+    class MainActivity : AppCompatActivity(), OnResponseListener , View.OnClickListener{
 
-        /*make an instance */
-        FormValidator formValidator = new FormValidator();
+    private lateinit var mainActivityMainBinding : ActivityMainBinding
 
-        /*You need to pass the root layout*/ 
-        /*You can call this method on form submit to get know if the user has filled all the fields*/
-        formValidator.isFormValidated(this, activityMainBinding.mainLinearLayoutLL, false );
-        }
 
-    @Override
-    public void onResponse(boolean isFormFilled) {
-    
-        if (!isFormFilled){
-            Toast.makeText(this, "Form is not filled", Toast.LENGTH_SHORT).show();
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainActivityMainBinding =  DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        mainActivityMainBinding.submitFormBTN.setOnClickListener(this)
+
+
+    }
+
+    override fun onResponse(isFormFilled: Boolean) {
+
+        if (isFormFilled){
+            /*Form is filled*/
+            Toast.makeText(this, "Form is filled", Toast.LENGTH_LONG).show()
         }else {
-            Toast.makeText(this, "Form is filled", Toast.LENGTH_SHORT).show();
+            /*form is not filled*/
+            Toast.makeText(this, "Please fill the form!", Toast.LENGTH_LONG).show()
+
         }
+    }
+
+    override fun onClick(view: View) {
+
+        when(view.id){
+            R.id.submitFormBTN -> {
+	    	
+                val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
+
+                FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, 		showErrors = true, optionalParams = optionalInput)
+            }
+
+        }
+
     }
     
     }
+   
+
+
 
 
 Usage
 -----
 -Validates form without the hasle of refering to each edit text and checking each input box.
 -Can set errors if enabled
-
+-Can skip optional values if you have any.. 
 
