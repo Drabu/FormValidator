@@ -47,6 +47,21 @@ Add the dependency:
 
     }
 
+    override fun onClick(view: View) {
+
+        when(view.id){
+            R.id.submitFormBTN -> {
+	    	
+                val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
+
+                FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL,
+	showErrors = true, optionalParams = optionalInput)
+            }
+
+        }
+
+    }
+    
     override fun onResponse(isFormFilled: Boolean) {
 
         if (isFormFilled){
@@ -57,20 +72,6 @@ Add the dependency:
             Toast.makeText(this, "Please fill the form!", Toast.LENGTH_LONG).show()
 
         }
-    }
-
-    override fun onClick(view: View) {
-
-        when(view.id){
-            R.id.submitFormBTN -> {
-	    	
-                val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
-
-                FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, 		showErrors = true, optionalParams = optionalInput)
-            }
-
-        }
-
     }
     
     }
