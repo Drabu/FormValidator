@@ -42,7 +42,10 @@ class MainActivity : AppCompatActivity(), OnResponseListener , View.OnClickListe
 
         when(view.id){
             R.id.submitFormBTN -> {
-                FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, showErrors = false)
+
+                val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
+
+                FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, showErrors = true, optionalParams = optionalInput)
             }
 
         }
