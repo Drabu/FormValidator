@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.os.Binder
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
@@ -16,12 +17,12 @@ class MainActivity : AppCompatActivity(), OnResponseListener , View.OnClickListe
 
     private lateinit var mainActivityMainBinding : ActivityMainBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivityMainBinding =  DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         mainActivityMainBinding.submitFormBTN.setOnClickListener(this)
+
 
 
     }
@@ -44,12 +45,14 @@ class MainActivity : AppCompatActivity(), OnResponseListener , View.OnClickListe
             R.id.submitFormBTN -> {
                 val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
 
-                FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL)
+                FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, showErrors = true)
             }
+
 
         }
 
     }
+
 
 
 
