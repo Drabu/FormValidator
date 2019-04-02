@@ -88,6 +88,13 @@ If you want to show errors:
 	showErrors = true)
 	
 
+
+You can show your custom error message: 
+        
+	FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, 
+	showErrors = true, message="Field can't be left blank.")
+	
+
 Usage
 -----
 -Validates form without the hasle of refering to each edit text and checking each input box.
