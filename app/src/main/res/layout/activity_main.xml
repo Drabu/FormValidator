@@ -27,15 +27,18 @@
 
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/someIdHere"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/firstNameET"
                     android:inputType="textPassword"
-                    android:hint="First Name"
+                    android:hint="@string/first_name"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:autofillHints="" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -54,9 +57,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <EditText
+
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:hint="LAst Name"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/lastNameET"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </android.support.design.widget.TextInputLayout>
+
 
                 </LinearLayout>
 

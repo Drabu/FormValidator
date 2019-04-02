@@ -11,11 +11,15 @@ import android.widget.Toast
 import com.oneclickaway.opensource.formvalidationsexample.databinding.ActivityMainBinding
 import com.oneclickaway.opensource.validation.interfaces.OnResponseListener
 import com.oneclickaway.opensource.validation.model.FormValidator
+import javax.xml.validation.Validator
 import kotlin.math.log
 
-class MainActivity : AppCompatActivity(), OnResponseListener , View.OnClickListener{
+class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationListener, OnResponseListener.OnFieldValidationListener,  View.OnClickListener{
+
 
     private lateinit var mainActivityMainBinding : ActivityMainBinding
+
+    var myValidator = FormValidator()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +28,27 @@ class MainActivity : AppCompatActivity(), OnResponseListener , View.OnClickListe
         mainActivityMainBinding.submitFormBTN.setOnClickListener(this)
 
 
+        /*validate all of my fields in this views */
+        myValidator.attachValidators(viewGroup = mainActivityMainBinding.mainLinearLayoutLL, onFieldValidationListener = this)
+
 
     }
 
-    override fun onResponse(isFormFilled: Boolean) {
+
+    override fun onClick(view: View) {
+
+        when(view.id){
+            R.id.submitFormBTN -> {
+                val optionalParams = intArrayOf(R.id.lastNameET)
+                myValidator.isFormValidated( optionalParams = optionalParams,  onFormValidationListener = this, showErrors = true,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL )
+            }
+
+        }
+
+    }
+
+
+    override fun onFormValidationListener(isFormFilled: Boolean) {
 
         if (isFormFilled){
             /*Form is filled*/
@@ -39,20 +60,12 @@ class MainActivity : AppCompatActivity(), OnResponseListener , View.OnClickListe
         }
     }
 
-    override fun onClick(view: View) {
 
-        when(view.id){
-            R.id.submitFormBTN -> {
-                val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
+    override fun onFieldValidationListener(isFormValidated: Boolean) {
 
-                FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, showErrors = true)
-            }
-
-
-        }
+        Toast.makeText(this, "Validators attached" , Toast.LENGTH_LONG).show()
 
     }
-
 
 
 

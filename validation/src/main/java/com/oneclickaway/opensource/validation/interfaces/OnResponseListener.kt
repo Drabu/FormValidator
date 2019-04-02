@@ -1,6 +1,14 @@
 package com.oneclickaway.opensource.validation.interfaces
 
 
-interface OnResponseListener {
-    fun onResponse(isFormFilled: Boolean)
+object OnResponseListener{
+
+    interface OnFormValidationListener {
+        fun onFormValidationListener (isFormFilled: Boolean)
+    }
+
+    interface OnFieldValidationListener {
+        fun onFieldValidationListener (isFormValidated: Boolean)
+    }
 }
+

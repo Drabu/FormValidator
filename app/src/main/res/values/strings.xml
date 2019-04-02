@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FormValidationsExample</string>
     <string name="fillTheForm">Please fill this form</string>
+    <string name="first_name">First Name</string>
 </resources>
