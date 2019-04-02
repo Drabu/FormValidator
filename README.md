@@ -1,7 +1,7 @@
 FormValidator
 ========
 
-This library  allows you to validate forms, just pass the root layout and it will tell you whether the edit text fields are filled in the view are not.
+This library  allows you to validate forms, just pass the root layout and you will get to know whether the edit text fields are filled in the view are not without referencing them one by one.
 
 Example is mentioned in the project:
 
