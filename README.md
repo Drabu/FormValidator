@@ -101,7 +101,9 @@ You can show your custom error message:
         
 	FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, 
 	showErrors = true, message="Field can't be left blank.")
-	
+
+
+	![](demo.gif)
 
 Usage
 -----

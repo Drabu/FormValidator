@@ -40,9 +40,7 @@ class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationLis
         }
 
 
-
     }
-
 
 
     override fun onFormValidationListener(isFormFilled: Boolean) {
@@ -58,10 +56,8 @@ class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationLis
     }
 
 
-
     override fun onDestroy() {
         super.onDestroy()
-
         FormValidator.unbind()
 
     }
