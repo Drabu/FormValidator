@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.xml.validation.Validator
 import kotlin.math.log
 
-class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationListener, OnResponseListener.OnFieldValidationListener,  View.OnClickListener{
+class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationListener {
 
 
     val TAG = javaClass.simpleName
@@ -35,28 +35,14 @@ class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationLis
         submitForm = findViewById(R.id.submitFormBTN)
         mainLinearLayoutLL = findViewById(R.id.mainLinearLayoutLL)
 
-
-
-        submitFormBTN.setOnClickListener(this)
-
-        /*validate all of my fields in this views */
-        myValidator.attachValidators(viewGroup = mainLinearLayoutLL, onFieldValidationListener = this)
-
-
-    }
-
-
-    override fun onClick(view: View) {
-
-        when(view.id){
-            R.id.submitFormBTN -> {
-                val optionalParams = intArrayOf(R.id.lastNameET)
-                myValidator.isFormValidated( optionalParams = optionalParams,  onFormValidationListener = this, showErrors = true,  viewGroup = mainLinearLayoutLL )
-            }
-
+        submitForm.setOnClickListener{
+            myValidator.isFormValidated(mainLinearLayoutLL, this, true)
         }
 
+
+
     }
+
 
 
     override fun onFormValidationListener(isFormFilled: Boolean) {
@@ -71,10 +57,6 @@ class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationLis
         }
     }
 
-
-    override fun onFieldValidationListener(isFormValidated: Boolean) {
-        Log.d(TAG, "Validators attached")
-    }
 
 
     override fun onDestroy() {
