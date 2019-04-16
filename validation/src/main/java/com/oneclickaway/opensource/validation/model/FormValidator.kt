@@ -12,6 +12,8 @@ import com.oneclickaway.opensource.validation.interfaces.OnResponseListener
 
 class FormValidator {
 
+
+
     fun isFormValidated(viewGroup: ViewGroup, onFormValidationListener: OnResponseListener.OnFormValidationListener, showErrors: Boolean = false, optionalParams: IntArray = intArrayOf(), message: String = "Required"){
         ValidateForm(message =  message,  optionalParams =optionalParams,  showErrors =  showErrors, onFormValidationListener =  onFormValidationListener).execute(viewGroup)
     }
@@ -22,17 +24,18 @@ class FormValidator {
         AttachValidators( onFieldValidationListener = onFieldValidationListener,  optionalParams = optionalParams , message= message).execute(viewGroup)
     }
 
-
-
     companion object {
+
+        var isBound = true
+
 
         private fun eraseWhenStartedTyping(editText: EditText, message: String) {
 
             Log.i("FormValidator", "Text Watcher attached")
 
             editText.addTextChangedListener(object : TextWatcher{
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
 
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -51,8 +54,9 @@ class FormValidator {
 
         }
 
-
         fun setErrorForTIL(enabled  : Boolean, editText : EditText, message: String){
+
+            if (!isBound){ return }
 
             if (editText.parent is ViewGroup && (editText.parent as ViewGroup).parent is TextInputLayout){
                 if (enabled){
@@ -68,9 +72,10 @@ class FormValidator {
                 }
             }
 
+        }
 
-
-
+        fun unbind() {
+            isBound = false
         }
 
     }

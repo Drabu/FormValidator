@@ -15,7 +15,9 @@
         tools:context=".MainActivity">
 
         <TextView
-            android:textSize="17dp"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/fillTheForm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -32,6 +34,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:maxLines="1"
                     android:id="@+id/firstNameET"
                     android:inputType="textPassword"
                     android:hint="@string/first_name"
@@ -45,7 +48,10 @@
 
 
             <EditText
+                android:maxLines="1"
+                android:inputType="text"
                 android:id="@+id/optionalFirstET"
+                android:hint="Last Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -60,10 +66,12 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:hint="LAst Name"
                         android:layout_height="wrap_content">
 
                         <EditText
+                            android:maxLines="1"
+                            android:inputType="text"
+                            android:hint="Street"
                             android:id="@+id/lastNameET"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
@@ -76,11 +84,17 @@
             </RelativeLayout>
 
             <EditText
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="Apartment number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
 
             <EditText
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="Opposite"
                 android:id="@+id/optionalSecondET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -92,7 +106,9 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/mlmdcccdc"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:hint="Fees"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
