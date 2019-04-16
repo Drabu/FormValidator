@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationLis
 
     override fun onFormValidationListener(isFormFilled: Boolean) {
 
+
         if (isFormFilled){
             /*Form is filled*/
             Toast.makeText(this, "Form is filled", Toast.LENGTH_LONG).show()
