@@ -106,6 +106,9 @@ You can show your custom error message:
 	
 
 ![](demo.gif)
+
+
+
 Usage
 -----
 -Validates form without the hasle of refering to each edit text and checking each input box.
