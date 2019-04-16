@@ -104,8 +104,13 @@ You can show your custom error message:
 
 
 	
-
+	
+<p align="center">
+ 
 ![](demo.gif)
+
+</p>
+
 
 
 
