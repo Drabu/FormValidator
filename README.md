@@ -105,13 +105,11 @@ You can show your custom error message:
 
 	
 	
+
+
 <p align="center">
- 
-![](demo.gif)
-
+    <img src="demo.gif" alt="Demonstartion image."/>
 </p>
-
-
 
 
 Usage
