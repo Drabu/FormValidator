@@ -33,33 +33,34 @@ Add the dependency:
     import com.oneclickaway.opensource.validation.interfaces.OnResponseListener;
     import com.oneclickaway.opensource.validation.model.FormValidator;
     
-    class MainActivity : AppCompatActivity(), OnResponseListener , View.OnClickListener{
+    class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationListener {
 
-    private lateinit var mainActivityMainBinding : ActivityMainBinding
+    val TAG = javaClass.simpleName
 
+    lateinit var submitForm  : Button
+    lateinit var mainLinearLayoutLL  : LinearLayout
+
+
+
+    var myValidator = FormValidator()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainActivityMainBinding =  DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
-        mainActivityMainBinding.submitFormBTN.setOnClickListener(this)
+        submitForm = findViewById(R.id.submitFormBTN)
+        mainLinearLayoutLL = findViewById(R.id.mainLinearLayoutLL)
 
-
-    }
-
-    override fun onClick(view: View) {
-
-        when(view.id){
-            R.id.submitFormBTN -> {	
-              FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL)
-            }
-
+        submitForm.setOnClickListener{
+            myValidator.isFormValidated(mainLinearLayoutLL, this, true)
         }
+        
 
     }
-    
-    override fun onResponse(isFormFilled: Boolean) {
-	// called once the evaluation is complete.	
+
+
+    override fun onFormValidationListener(isFormFilled: Boolean) {
+
         if (isFormFilled){
             /*Form is filled*/
             Toast.makeText(this, "Form is filled", Toast.LENGTH_LONG).show()
@@ -68,6 +69,13 @@ Add the dependency:
             Toast.makeText(this, "Please fill the form!", Toast.LENGTH_LONG).show()
 
         }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        FormValidator.unbind()
+
     }
     
     }
