@@ -103,8 +103,9 @@ You can show your custom error message:
 	showErrors = true, message="Field can't be left blank.")
 
 
-	![](demo.gif)
+	
 
+![](demo.gif)
 Usage
 -----
 -Validates form without the hasle of refering to each edit text and checking each input box.
