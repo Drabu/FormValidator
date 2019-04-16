@@ -106,6 +106,7 @@ You can show your custom error message:
 	
 	
 
+### How it works
 
 <p align="center">
     <img src="demo.gif" alt="Demonstartion image."/>
