@@ -1,6 +1,5 @@
 package com.oneclickaway.opensource.validation.model
 
-import android.os.AsyncTask
 import android.support.design.widget.TextInputLayout
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,27 +8,35 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import com.oneclickaway.opensource.validation.interfaces.OnResponseListener
+import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableObserver
+import io.reactivex.schedulers.Schedulers
 
-class FormValidator {
+object FormValidator {
 
+  val TAG = javaClass.simpleName
+  var compositeDisposable  = CompositeDisposable()
 
+  private fun checkIfFieldLeftBlank(v: ViewGroup, oe: ObservableEmitter<View>, optionalParams: IntArray) {
+        for (i in 0 until v.childCount) {
+            if (v.getChildAt(i) is EditText) {
 
-    fun isFormValidated(viewGroup: ViewGroup, onFormValidationListener: OnResponseListener.OnFormValidationListener, showErrors: Boolean = false, optionalParams: IntArray = intArrayOf(), message: String = "Required"){
-        ValidateForm(message =  message,  optionalParams =optionalParams,  showErrors =  showErrors, onFormValidationListener =  onFormValidationListener).execute(viewGroup)
+                if ((v.getChildAt(i) as EditText).text.toString().isEmpty() && !(optionalParams.contains(v.getChildAt(i).id))) {
+                    /*edit text is empty*/
+                    oe.onNext(v.getChildAt(i))
+                }
+                Log.d("FormValidator ", "Parent is Layout " + ((v.getChildAt(i) as EditText ).parent is TextInputLayout))
+            } else if (v.getChildAt(i) is ViewGroup) {
+                checkIfFieldLeftBlank(v.getChildAt(i) as ViewGroup, oe, optionalParams)
+
+            }
+        }
     }
 
-
-
-    fun attachValidators(viewGroup: ViewGroup, onFieldValidationListener: OnResponseListener.OnFieldValidationListener, optionalParams: IntArray = intArrayOf(), message: String = "Required"){
-        AttachValidators( onFieldValidationListener = onFieldValidationListener,  optionalParams = optionalParams , message= message).execute(viewGroup)
-    }
-
-    companion object {
-
-        var isBound = true
-
-
-        private fun eraseWhenStartedTyping(editText: EditText, message: String) {
+  private fun eraseWhenStartedTyping(editText: EditText, message: String) {
 
             Log.i("FormValidator", "Text Watcher attached")
 
@@ -54,9 +61,7 @@ class FormValidator {
 
         }
 
-        fun setErrorForTIL(enabled  : Boolean, editText : EditText, message: String){
-
-            if (!isBound){ return }
+  private fun setErrorForTIL(enabled  : Boolean, editText : EditText, message: String){
 
             if (editText.parent is ViewGroup && (editText.parent as ViewGroup).parent is TextInputLayout){
                 if (enabled){
@@ -74,103 +79,69 @@ class FormValidator {
 
         }
 
-        fun unbind() {
-            isBound = false
-        }
+  fun clearFormValidator() { compositeDisposable.clear() }
 
-    }
+  fun isFormFilled(viewGroup: ViewGroup, onFormValidationListener: OnResponseListener.OnFormValidationListener, message : String = "Required", errorEnabled : Boolean = true, optionalParams:IntArray = intArrayOf()){
 
+        /*here we assume the form is filled*/
+        var isFormFilled = true
 
-    private class AttachValidators (  var message : String , var onFieldValidationListener: OnResponseListener.OnFieldValidationListener, var optionalParams:IntArray  ): AsyncTask<ViewGroup, View, Void> (){
+        compositeDisposable.add(
 
-        override fun doInBackground(vararg p0: ViewGroup): Void? {
-            checkIfFieldLeftBlank(p0[0])
-            return null
-        }
+                Observable.create<View> {
 
+                    checkIfFieldLeftBlank(viewGroup, it, optionalParams)
 
-        override fun onProgressUpdate(vararg values: View) {
-            super.onProgressUpdate(*values)
-
-            eraseWhenStartedTyping((values[0] as EditText),  message)
-
-        }
-
-
-        fun checkIfFieldLeftBlank(v: ViewGroup) {
-            for (i in 0 until v.childCount) {
-                if (v.getChildAt(i) is EditText) {
-                    if (!(optionalParams.contains(v.getChildAt(i).id))) {
-                        /*edit text is empty*/
-                        publishProgress(v.getChildAt(i))
-                    }
-                } else if (v.getChildAt(i) is ViewGroup) {
-                    checkIfFieldLeftBlank(v.getChildAt(i) as ViewGroup)
+                    it.onComplete()
 
                 }
-            }
-        }
+                        .subscribeOn(Schedulers.computation())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .distinctUntilChanged()
+                        .subscribeWith(object : DisposableObserver<View>() {
+                            override fun onComplete() {
+                                onFormValidationListener.onFormValidationTaskSuccess(isFormFilled)
+                            }
 
-        override fun onPostExecute(result: Void?) {
-            super.onPostExecute(result)
-            onFieldValidationListener.onFieldValidationListener(true)
-        }
+                            override fun onNext(view: View) {
+                                setError(view)
+                            }
+
+                            private fun setError(view :View) {
+
+                                /*since we have an empty filed so our assumption was wrong*/
+                                isFormFilled  = false
+
+                                if ( errorEnabled ) {
+
+                                    if ( view.parent is ViewGroup ){
+                                        if ( (view.parent as ViewGroup).parent is  TextInputLayout) {
+                                            eraseWhenStartedTyping((view as EditText), message)
+                                            setErrorForTIL(true, view , message)
+                                        }else {
+                                            (view as EditText).error = message
+                                        }
+
+                                        Log.d(TAG, " ${(view.parent as ViewGroup).parent.javaClass.simpleName} ")
+
+                                    }else {
+                                        (view as EditText).error = message
+                                    }
+
+                                }
+
+                            }
+
+                            override fun onError(e: Throwable) {
+                                onFormValidationListener.onFormValidationError(e)
+                            }
+
+                        })
+
+
+        )
 
     }
-
-
-    private class ValidateForm (var message : String , var showErrors: Boolean, var onFormValidationListener: OnResponseListener.OnFormValidationListener, var optionalParams:IntArray ) : AsyncTask<ViewGroup, View, Void>() {
-
-        var isFormFilled: Boolean = true
-
-        override fun doInBackground(vararg viewGroups: ViewGroup): Void? {
-            checkIfFieldLeftBlank(viewGroups[0])
-            return null
-        }
-
-        override fun onProgressUpdate(vararg values: View) {
-            super.onProgressUpdate(*values)
-
-            if (showErrors) {
-                if ( values[0].parent is ViewGroup ){
-                    if ( (values[0].parent as ViewGroup).parent is  TextInputLayout) {
-                        eraseWhenStartedTyping((values[0] as EditText), message)
-                        setErrorForTIL(true, values[0] as EditText , message)
-                    }else {
-                        (values[0] as EditText).error = message
-                    }
-                    Log.d("FormValidator", " ${(values[0].parent as ViewGroup).parent.javaClass.simpleName} ")
-                }else {
-                    (values[0] as EditText).error = message
-                }
-            }
-
-            isFormFilled = false
-        }
-
-
-        override fun onPostExecute(aVoid: Void?) {
-            super.onPostExecute(aVoid)
-            onFormValidationListener.onFormValidationListener(isFormFilled)
-        }
-
-        fun checkIfFieldLeftBlank(v: ViewGroup) {
-            for (i in 0 until v.childCount) {
-                if (v.getChildAt(i) is EditText) {
-
-                    if ((v.getChildAt(i) as EditText).text.toString().isEmpty() && !(optionalParams.contains(v.getChildAt(i).id))) {
-                        /*edit text is empty*/
-                        publishProgress(v.getChildAt(i))
-                    }
-                    Log.d("FormValidator ", "Parent is Layout " + ((v.getChildAt(i) as EditText ).parent is TextInputLayout))
-                } else if (v.getChildAt(i) is ViewGroup) {
-                    checkIfFieldLeftBlank(v.getChildAt(i) as ViewGroup)
-
-                }
-            }
-        }
-    }
-
 
 
 }

@@ -1,14 +1,18 @@
 package com.oneclickaway.opensource.validation.interfaces
 
+import com.oneclickaway.opensource.validation.model.ValidationResult
+
 
 object OnResponseListener{
 
     interface OnFormValidationListener {
-        fun onFormValidationListener (isFormFilled: Boolean)
+        fun onFormValidationTaskSuccess (isFormFilled: Boolean)
+        fun onFormValidationError(error : Throwable)
     }
 
     interface OnFieldValidationListener {
         fun onFieldValidationListener (isFormValidated: Boolean)
     }
+
 }
 

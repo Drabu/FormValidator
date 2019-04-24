@@ -1,32 +1,19 @@
 package com.oneclickaway.opensource.formvalidationsexample
 
-import android.os.Binder
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.oneclickaway.opensource.formvalidationsexample.databinding.ActivityMainBinding
 import com.oneclickaway.opensource.validation.interfaces.OnResponseListener
 import com.oneclickaway.opensource.validation.model.FormValidator
-import kotlinx.android.synthetic.main.activity_main.*
-import javax.xml.validation.Validator
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationListener {
-
 
     val TAG = javaClass.simpleName
 
     lateinit var submitForm  : Button
     lateinit var mainLinearLayoutLL  : LinearLayout
-
-
-
-    var myValidator = FormValidator()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,31 +23,35 @@ class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationLis
         mainLinearLayoutLL = findViewById(R.id.mainLinearLayoutLL)
 
         submitForm.setOnClickListener{
-            myValidator.isFormValidated(mainLinearLayoutLL, this, true)
+            FormValidator.isFormFilled(mainLinearLayoutLL, this, optionalParams = intArrayOf(R.id.lastNameET))
         }
-
 
     }
 
-
-    override fun onFormValidationListener(isFormFilled: Boolean) {
+    override fun onFormValidationTaskSuccess(isFormFilled: Boolean) {
+        /*Here isFormFilled represents that weather the form is filled or not*/
 
         if (isFormFilled){
-            /*Form is filled*/
-            Toast.makeText(this, "Form is filled", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Form filled", Toast.LENGTH_LONG).show()
         }else {
-            /*form is not filled*/
-            Toast.makeText(this, "Please fill the form!", Toast.LENGTH_LONG).show()
-
+            Toast.makeText(this, "Form is not yet filled, Please fill the form.", Toast.LENGTH_LONG).show()
         }
+
+    }
+
+    override fun onFormValidationError(error: Throwable) {
+        /*this method gives you a way of handling error if there is any*/
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        FormValidator.unbind()
+
+        /*Be sure to call this in your onDestroy method to unBind the validator*/
+        FormValidator.clearFormValidator()
 
     }
+
 
 
 }
