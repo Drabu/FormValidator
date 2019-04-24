@@ -2,7 +2,7 @@ FormValidator
 ========
 
 This library allows you to validate enormous Edit Text Fields in android just by a single line, It saves you from the hassle of checking individual edit text boxes one by one then setting the error.
-The library uses RX Java 2 and provides methods for error handling as well.
+The library also supports text input layouts for setting errors. The library uses RX Java 2 and provides methods for error handling as well. 
 
 Example is mentioned in the project:
 
