@@ -38,7 +38,7 @@ object FormValidator {
 
   private fun eraseWhenStartedTyping(editText: EditText, message: String) {
 
-            Log.i("FormValidator", "Text Watcher attached")
+            Log.i(TAG, "Text Watcher attached")
 
             editText.addTextChangedListener(object : TextWatcher{
 
