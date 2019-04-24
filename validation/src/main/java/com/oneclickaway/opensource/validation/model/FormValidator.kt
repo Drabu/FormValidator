@@ -28,7 +28,7 @@ object FormValidator {
                     /*edit text is empty*/
                     oe.onNext(v.getChildAt(i))
                 }
-                Log.d("FormValidator ", "Parent is Layout " + ((v.getChildAt(i) as EditText ).parent is TextInputLayout))
+                Log.d(TAG , "Parent is Layout " + ((v.getChildAt(i) as EditText ).parent is TextInputLayout))
             } else if (v.getChildAt(i) is ViewGroup) {
                 checkIfFieldLeftBlank(v.getChildAt(i) as ViewGroup, oe, optionalParams)
 
@@ -51,10 +51,10 @@ object FormValidator {
                 override fun afterTextChanged(p0: Editable?) {
                     if (editText.text.toString().isEmpty()) {
                         setErrorForTIL(true, editText,  message)
-                        Log.i("FormValidator", "Field is empty")
+                        Log.i(TAG, "Field is empty")
                     }else {
                         setErrorForTIL(false, editText,  message)
-                        Log.i("FormValidator", "Field has data")
+                        Log.i(TAG, "Field has data")
                     }
                 }
             })

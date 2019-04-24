@@ -86,21 +86,19 @@ Add the dependency:
 In case you have optional parameters : 
         
  	val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
-	FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL,
-	optionalParams = optionalInput)
+	FormValidator.isFormFilled( optionalParams = optionalInput, onResponseListener = this,  viewGroup = mainLinearLayoutLL)
 	
 
 If you want to show errors: 
         
-	FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, 
-	showErrors = true)
+	FormValidator.isFormFilled( onResponseListener = this,  viewGroup = mainLinearLayoutLL, errorEnabled = true)
 	
 
 
 You can show your custom error message: 
         
-	FormValidator().isFormValidated( onResponseListener = this,  viewGroup = mainActivityMainBinding.mainLinearLayoutLL, 
-	showErrors = true, message="Field can't be left blank.")
+	FormValidator.isFormFilled( onResponseListener = this,  viewGroup = mainLinearLayoutLL, 
+	errorEnabled = true, message="Field can't be left blank.")
 
 
 	
@@ -115,6 +113,7 @@ You can show your custom error message:
 
 Usage
 -----
+-Minimum sdk 15
 -Validates form without the hasle of refering to each edit text and checking each input box.
 -Can set errors if enabled
 -Can skip optional values if you have any.. 
