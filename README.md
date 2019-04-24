@@ -22,7 +22,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency: 
 
     dependencies {
-	         implementation 'com.github.Drabu:FormValidator:1.1.2'
+	         implementation 'com.github.Drabu:FormValidator:1.1.3'
 	 }
    
 
