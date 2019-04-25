@@ -1,8 +1,6 @@
-
 FormValidator
 ========
 Easily Valdiate huge forms
-
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![](https://jitpack.io/v/Drabu/FormValidator.svg)](https://jitpack.io/#Drabu/FormValidator)
 
@@ -19,7 +17,6 @@ Example is mentioned in the project:
     <img src="demo.gif" alt="Demonstartion image."/>
 </p>
 
-
 Configuration
 -------------
 
@@ -32,14 +29,11 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
 
-
 Add the dependency: 
 
     dependencies {
 	         implementation 'com.github.Drabu:FormValidator:1.1.3'
 	 }
-   
-
 
 In case you have optional parameters : 
         
@@ -47,19 +41,16 @@ In case you have optional parameters :
 	FormValidator.isFormFilled( optionalParams = optionalInput, onResponseListener = this,
 	viewGroup = mainLinearLayoutLL)
 	
-
 If you want to show errors: 
         
 	FormValidator.isFormFilled( onResponseListener = this,  viewGroup = mainLinearLayoutLL, 
 	errorEnabled = true)
 	
 
-
 You can show your custom error message: 
         
 	FormValidator.isFormFilled( onResponseListener = this,  viewGroup = mainLinearLayoutLL, 
 	errorEnabled = true, message="Field can't be left blank.")
-
 
 #Example Kotlin Class: 
 
@@ -114,12 +105,9 @@ You can show your custom error message:
 
     }
    
-
-
 Usage
 -----
 -Minimum sdk 15
 -Validates form without the hasle of refering to each edit text and checking each input box.
 -Can set errors if enabled
 -Can skip optional values if you have any.. 
-
