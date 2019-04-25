@@ -52,14 +52,14 @@ repositories {
 ext {
 
     //For bintray and jcenter distribution
-    bintrayRepo = 'maven'
-    bintrayName = 'FormValidator'
+    bintrayRepo = 'FormValidator'
+    bintrayName = 'com.oneclickaway.opensource.formvalidationsexample'
 
     publishedGroupId = 'com.oneclickaway.opensource.formvalidationsexample'
     libraryName = 'FormValidator'
     artifact = 'validation' //This artifact name should be the same with library module name
 
-    libraryDescription = 'This library allows you to validate Huge Forms containing Fields in android just by a single line, It saves you from the hassle of checking individual edit text boxes one by one then setting the error.\n' +
+    libraryDescription = 'This library allows you to validate huge forms containing fields in android just by a single line, It saves you from the hassle of checking individual edit text boxes one by one then setting the error.\n' +
             'This library supports edit texts view and no custom view is requred. it also supports error validation for TextInputLayouts. \n' +
             '\n' +
             'The library is written in kotlin and is build on top of RX Java and it provides methods for error handling as well. '
@@ -72,16 +72,15 @@ ext {
     developerId = 'drabu'
     developerName = 'Burhan ud din Drabu'
     developerEmail = 'burhan.drabu@gmail.com'
-    organization = '1clickAway.in' // if you push to organization's repository.
+    organization = 'drabu'// if you push to organization's repository.
     licenseName = 'The Apache Software License, Version 2.0'  //Example for license
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 
 }
 
-subprojects {
-    tasks.withType(Javadoc).all {enabled = false}
-}
+
+
 
 
 //These two remote files contain Bintray configuration as described above.
