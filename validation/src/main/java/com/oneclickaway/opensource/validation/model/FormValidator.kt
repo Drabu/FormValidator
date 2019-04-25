@@ -15,6 +15,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
+/**
+ * @author buren
+ * @since 07.07.17
+ */
 object FormValidator {
 
   val TAG = javaClass.simpleName

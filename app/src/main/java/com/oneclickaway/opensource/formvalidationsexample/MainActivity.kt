@@ -8,6 +8,10 @@ import android.widget.Toast
 import com.oneclickaway.opensource.validation.interfaces.OnResponseListener
 import com.oneclickaway.opensource.validation.model.FormValidator
 
+/**
+ * @author buren
+ * @since 07.07.17
+ */
 class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationListener {
 
     val TAG = javaClass.simpleName
