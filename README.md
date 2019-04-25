@@ -1,10 +1,20 @@
 FormValidator
 ========
 
-This library allows you to validate enormous Edit Text Fields in android just by a single line, It saves you from the hassle of checking individual edit text boxes one by one then setting the error.
-The library also supports text input layouts for setting errors. The library uses RX Java 2 and provides methods for error handling as well. 
+This library allows you to validate Huge Forms containing Fields in android just by a single line, It saves you from the hassle of checking individual edit text boxes one by one then setting the error.
+This library supports edit texts view and no custom view is requred. it also supports error validation for TextInputLayouts. 
+
+The library is written in kotlin and is build on top of RX Java and it provides methods for error handling as well. 
 
 Example is mentioned in the project:
+
+
+### How it works
+
+<p align="center">
+    <img src="demo.gif" alt="Demonstartion image."/>
+</p>
+
 
 Configuration
 -------------
@@ -25,6 +35,26 @@ Add the dependency:
 	         implementation 'com.github.Drabu:FormValidator:1.1.3'
 	 }
    
+
+
+In case you have optional parameters : 
+        
+ 	val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
+	FormValidator.isFormFilled( optionalParams = optionalInput, onResponseListener = this,
+	viewGroup = mainLinearLayoutLL)
+	
+
+If you want to show errors: 
+        
+	FormValidator.isFormFilled( onResponseListener = this,  viewGroup = mainLinearLayoutLL, 
+	errorEnabled = true)
+	
+
+
+You can show your custom error message: 
+        
+	FormValidator.isFormFilled( onResponseListener = this,  viewGroup = mainLinearLayoutLL, 
+	errorEnabled = true, message="Field can't be left blank.")
 
 
 #Example Kotlin Class: 
@@ -80,35 +110,6 @@ Add the dependency:
 
     }
    
-
-
-
-In case you have optional parameters : 
-        
- 	val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
-	FormValidator.isFormFilled( optionalParams = optionalInput, onResponseListener = this,  viewGroup = mainLinearLayoutLL)
-	
-
-If you want to show errors: 
-        
-	FormValidator.isFormFilled( onResponseListener = this,  viewGroup = mainLinearLayoutLL, errorEnabled = true)
-	
-
-
-You can show your custom error message: 
-        
-	FormValidator.isFormFilled( onResponseListener = this,  viewGroup = mainLinearLayoutLL, 
-	errorEnabled = true, message="Field can't be left blank.")
-
-
-	
-	
-
-### How it works
-
-<p align="center">
-    <img src="demo.gif" alt="Demonstartion image."/>
-</p>
 
 
 Usage
