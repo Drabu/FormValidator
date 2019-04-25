@@ -21,8 +21,13 @@ import io.reactivex.schedulers.Schedulers
  */
 object FormValidator {
 
-  val TAG = javaClass.simpleName
-  var compositeDisposable  = CompositeDisposable()
+
+    val TAG = javaClass.simpleName
+    var compositeDisposable  = CompositeDisposable()
+
+    /*here we assume the form is filled*/
+    var isFormFilled = true
+
 
   private fun checkIfFieldLeftBlank(v: ViewGroup, oe: ObservableEmitter<View>, optionalParams: IntArray) {
         for (i in 0 until v.childCount) {
@@ -83,12 +88,12 @@ object FormValidator {
 
         }
 
+  /*** @author buren* @since 07.07.17*/
   fun clearFormValidator() { compositeDisposable.clear() }
 
+  /*** @author buren* @since 07.07.17*/
   fun isFormFilled(viewGroup: ViewGroup, onFormValidationListener: OnResponseListener.OnFormValidationListener, message : String = "Required", errorEnabled : Boolean = true, optionalParams:IntArray = intArrayOf()){
 
-        /*here we assume the form is filled*/
-        var isFormFilled = true
 
         compositeDisposable.add(
 
@@ -102,46 +107,54 @@ object FormValidator {
                         .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .distinctUntilChanged()
-                        .subscribeWith(object : DisposableObserver<View>() {
-                            override fun onComplete() {
-                                onFormValidationListener.onFormValidationTaskSuccess(isFormFilled)
-                            }
-
-                            override fun onNext(view: View) {
-                                setError(view)
-                            }
-
-                            private fun setError(view :View) {
-
-                                /*since we have an empty filed so our assumption was wrong*/
-                                isFormFilled  = false
-
-                                if ( errorEnabled ) {
-
-                                    if ( view.parent is ViewGroup ){
-                                        if ( (view.parent as? ViewGroup)?.parent is  TextInputLayout) {
-                                            eraseWhenStartedTyping((view as? EditText)!!, message)
-                                            setErrorForTIL(true, view , message)
-                                        }else {
-                                            (view as? EditText)?.error = message
-                                        }
-
-                                    }else {
-                                        (view as? EditText)?.error = message
-                                    }
-
-                                }
-
-                            }
-
-                            override fun onError(e: Throwable) {
-                                onFormValidationListener.onFormValidationError(e)
-                            }
-
-                        })
+                        .subscribeWith(getObserver(onFormValidationListener, message, errorEnabled))
 
 
         )
+
+    }
+
+
+
+    private fun  getObserver(onFormValidationListener: OnResponseListener.OnFormValidationListener, message : String, errorEnabled: Boolean )  : DisposableObserver<View>{
+
+        return object : DisposableObserver<View>() {
+            override fun onComplete() {
+                onFormValidationListener.onFormValidationTaskSuccess(isFormFilled)
+            }
+
+            override fun onNext(view: View) {
+                setError(view)
+            }
+
+            private fun setError(view :View) {
+
+                /*since we have an empty filed so our assumption was wrong*/
+                isFormFilled  = false
+
+                if ( errorEnabled ) {
+
+                    if ( view.parent is ViewGroup ){
+                        if ( (view.parent as? ViewGroup)?.parent is  TextInputLayout) {
+                            eraseWhenStartedTyping((view as? EditText)!!, message)
+                            setErrorForTIL(true, view , message)
+                        }else {
+                            (view as? EditText)?.error = message
+                        }
+
+                    }else {
+                        (view as? EditText)?.error = message
+                    }
+
+                }
+
+            }
+
+            override fun onError(e: Throwable) {
+                onFormValidationListener.onFormValidationError(e)
+            }
+
+        }
 
     }
 
