@@ -1,17 +1,15 @@
 package com.oneclickaway.opensource.validation.interfaces
 
-/**
- * @author buren
- * @since 07.07.17
- */
+/*** @author buren* */
 object OnResponseListener {
 
     interface OnFormValidationListener {
-        /*** @author buren* @since 07.07.17*/
+        /*** @author buren* */
         fun onFormValidationTaskSuccess(isFormFilled: Boolean)
 
-        /*** @author buren* @since 07.07.17*/
+        /*** @author buren **/
         fun onFormValidationError(error: Throwable)
+
     }
 
 }
