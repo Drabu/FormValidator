@@ -10,9 +10,7 @@ This library supports edit texts view and no custom view is requred. it also sup
 The library is written in kotlin and is build on top of RX Java and it provides methods for error handling as well. 
 
 Example is mentioned in the project:
-
 ### How it works
-
 <p align="center">
     <img src="demo.gif" alt="Demonstartion image."/>
 </p>
