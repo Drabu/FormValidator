@@ -79,11 +79,10 @@ ext {
 
 }
 
-tasks.withType(Javadoc) {
-    options.addStringOption('Xdoclint:none', '-quiet')
-    options.addStringOption('encoding', 'UTF-8')
-    options.addStringOption('charSet', 'UTF-8')
+subprojects {
+    tasks.withType(Javadoc).all {enabled = false}
 }
+
 
 //These two remote files contain Bintray configuration as described above.
 apply from: 'https://raw.githubusercontent.com/quangctkm9207/template-files/master/android/gradle/install.gradle'

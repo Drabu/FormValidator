@@ -41,3 +41,7 @@ repositories {
     mavenCentral()
 }
 
+subprojects {
+    tasks.withType(Javadoc).all {enabled = false}
+}
+
