@@ -28,11 +28,11 @@ object FormValidator {
         for (i in 0 until v.childCount) {
             if (v.getChildAt(i) is EditText) {
 
-                if ((v.getChildAt(i) as? EditText)!!.text.toString().isEmpty() && !(optionalParams.contains(v.getChildAt(i).id))) {
+                if ((v.getChildAt(i) as? EditText)?.text.toString().isEmpty() && !(optionalParams.contains(v.getChildAt(i).id))) {
                     /*edit text is empty*/
                     oe.onNext(v.getChildAt(i))
                 }
-                Log.d(TAG , "Parent is Layout " + ((v.getChildAt(i) as? EditText )!!.parent is TextInputLayout))
+                Log.d(TAG , "Parent is Layout " + ((v.getChildAt(i) as? EditText )?.parent is TextInputLayout))
             } else if (v.getChildAt(i) is ViewGroup) {
                 checkIfFieldLeftBlank((v.getChildAt(i) as? ViewGroup)!!, oe, optionalParams)
 
@@ -67,11 +67,11 @@ object FormValidator {
 
   private fun setErrorForTIL(enabled  : Boolean, editText : EditText, message: String){
 
-            if (editText.parent is ViewGroup && (editText.parent as? ViewGroup)!!.parent is TextInputLayout){
+            if (editText.parent is ViewGroup && (editText.parent as? ViewGroup)?.parent is TextInputLayout){
                 if (enabled){
-                    ( (editText.parent as? ViewGroup)!!.parent as?  TextInputLayout )!!.error = message
+                    ( (editText.parent as? ViewGroup)?.parent as?  TextInputLayout )?.error = message
                 }else {
-                    ( (editText.parent as? ViewGroup)!!.parent as?  TextInputLayout )!!.isErrorEnabled = false
+                    ( (editText.parent as? ViewGroup)?.parent as?  TextInputLayout )?.isErrorEnabled = false
                 }
 
             }else {
@@ -119,17 +119,15 @@ object FormValidator {
                                 if ( errorEnabled ) {
 
                                     if ( view.parent is ViewGroup ){
-                                        if ( (view.parent as? ViewGroup)!!.parent is  TextInputLayout) {
+                                        if ( (view.parent as? ViewGroup)?.parent is  TextInputLayout) {
                                             eraseWhenStartedTyping((view as? EditText)!!, message)
                                             setErrorForTIL(true, view , message)
                                         }else {
-                                            (view as? EditText)!!.error = message
+                                            (view as? EditText)?.error = message
                                         }
 
-                                        Log.d(TAG, " ${(view.parent as? ViewGroup)!!.parent.javaClass.simpleName} ")
-
                                     }else {
-                                        (view as? EditText)!!.error = message
+                                        (view as? EditText)?.error = message
                                     }
 
                                 }
