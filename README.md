@@ -2,6 +2,7 @@ FormValidator
 ========
 Easily Valdiate huge forms
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3fcd52642ad44de7b6addb0b6ea30419)](https://app.codacy.com/app/Drabu/FormValidator?utm_source=github.com&utm_medium=referral&utm_content=Drabu/FormValidator&utm_campaign=Badge_Grade_Dashboard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![](https://jitpack.io/v/Drabu/FormValidator.svg)](https://jitpack.io/#Drabu/FormValidator)
 
 This library allows you to validate Huge Forms containing Fields in android just by a single line, It saves you from the hassle of checking individual edit text boxes one by one then setting the error.
@@ -10,7 +11,9 @@ This library supports edit texts view and no custom view is requred. it also sup
 The library is written in kotlin and is build on top of RX Java and it provides methods for error handling as well. 
 
 Example is mentioned in the project:
+
 ### How it works
+
 <p align="center">
     <img src="demo.gif" alt="Demonstartion image."/>
 </p>
