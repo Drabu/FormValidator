@@ -4,6 +4,7 @@ Easily Valdiate huge forms
 
 [ ![Download](https://api.bintray.com/packages/drabu/FormValidator/com.oneclickaway.opensource.formvalidationsexample/images/download.svg) ](https://bintray.com/drabu/FormValidator/com.oneclickaway.opensource.formvalidationsexample/_latestVersion)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9df707c7085c47979162af31e6406e66)](https://www.codacy.com/app/Drabu/FormValidator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Drabu/FormValidator&amp;utm_campaign=Badge_Grade)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This library allows you to validate Huge Forms containing Fields in android just by a single line, It saves you from the hassle of checking individual edit text boxes one by one then setting the error.
 This library supports edit texts view and no custom view is requred. it also supports error validation for TextInputLayouts. 
