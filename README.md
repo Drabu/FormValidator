@@ -28,7 +28,7 @@ Configuration
 Add the dependency: 
 
     dependencies {
-    	       //check the version from the badge above 
+    	   //check the version from the download badge above 
 		 implementation 'com.oneclickaway.opensource.formvalidationsexample:validation:x.x.x'
 	 }
 
@@ -51,9 +51,6 @@ You can show your custom error message:
 
 #Example Kotlin Class: 
 
-    import com.oneclickaway.opensource.validation.interfaces.OnResponseListener
-    import com.oneclickaway.opensource.validation.model.FormValidator
-    
     class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationListener {
 
         val TAG = javaClass.simpleName
