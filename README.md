@@ -1,13 +1,16 @@
 FormValidator
 ========
-Easily Valdiate huge forms
+Easily Valdiate forms in android
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![](https://jitpack.io/v/Drabu/FormValidator.svg)](https://jitpack.io/#Drabu/FormValidator)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9df707c7085c47979162af31e6406e66)](https://www.codacy.com/app/Drabu/FormValidator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Drabu/FormValidator&amp;utm_campaign=Badge_Grade)
 [ ![Download](https://api.bintray.com/packages/drabu/FormValidator/com.oneclickaway.opensource.formvalidationsexample/images/download.svg) ](https://bintray.com/drabu/FormValidator/com.oneclickaway.opensource.formvalidationsexample/_latestVersion)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9df707c7085c47979162af31e6406e66)](https://www.codacy.com/app/Drabu/FormValidator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Drabu/FormValidator&amp;utm_campaign=Badge_Grade)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This library allows you to validate Huge Forms containing Fields in android just by a single line, It saves you from the hassle of checking individual edit text boxes one by one then setting the error.
-This library supports edit texts view and no custom view is requred. it also supports error validation for TextInputLayouts. 
+Being an android developer you will come accoss forms where you need to make sure the user has filled all the fields. This gets very annoying if there are too many input fields as you need to check them each individually. Being an android developer i faced this issue so many times and no library came actually helped fixing this issue so i wrote one on my own.
+
+This library allows you to validate huge forms containing various fields in android just by writing a single line, It saves you from the hassle of checking individual edit text boxes one by one then setting the error which puts a lot of bioler plate code.
+
+This library supports edit texts view and no custom view is requred. The Libraray automatically detects TextInputLayouts ans sets errors on them if enabled. 
 
 The library is written in kotlin and is build on top of RX Java and it provides methods for error handling as well. 
 
@@ -22,19 +25,11 @@ Example is mentioned in the project:
 Configuration
 -------------
 
-Add it in your root build.gradle at the end of repositories:
-
-    allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-
 Add the dependency: 
 
     dependencies {
-	         implementation 'com.github.Drabu:FormValidator:1.1.3'
+    	   //check the version from the download badge above 
+		 implementation 'com.oneclickaway.opensource.formvalidationsexample:validation:x.x.x'
 	 }
 
 In case you have optional parameters : 
@@ -56,9 +51,6 @@ You can show your custom error message:
 
 #Example Kotlin Class: 
 
-    import com.oneclickaway.opensource.validation.interfaces.OnResponseListener
-    import com.oneclickaway.opensource.validation.model.FormValidator
-    
     class MainActivity : AppCompatActivity(), OnResponseListener.OnFormValidationListener {
 
         val TAG = javaClass.simpleName
