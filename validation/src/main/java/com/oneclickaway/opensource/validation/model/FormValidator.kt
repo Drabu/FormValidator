@@ -22,11 +22,11 @@ import io.reactivex.schedulers.Schedulers
 object FormValidator {
 
 
-    val TAG = javaClass.simpleName
-    var compositeDisposable  = CompositeDisposable()
+    private val TAG = javaClass.simpleName
+    private  var compositeDisposable  = CompositeDisposable()
 
     /*here we assume the form is filled*/
-    var isFormFilled = true
+    private  var isFormFilled = true
 
 
   private fun checkIfFieldLeftBlank(v: ViewGroup, oe: ObservableEmitter<View>, optionalParams: IntArray) {
