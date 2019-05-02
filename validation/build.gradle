@@ -67,7 +67,7 @@ ext {
     siteUrl = 'https://github.com/drabu/FormValidator'
     gitUrl = 'https://github.com/drabu/FormValidator'
 
-    libraryVersion = '1.1.3'
+    libraryVersion = '1.1.4'
 
     developerId = 'drabu'
     developerName = 'Burhan ud din Drabu'
