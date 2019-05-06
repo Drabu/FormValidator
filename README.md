@@ -5,6 +5,7 @@ Easily Valdiate forms in android
 [ ![Download](https://api.bintray.com/packages/drabu/FormValidator/com.oneclickaway.opensource.formvalidationsexample/images/download.svg) ](https://bintray.com/drabu/FormValidator/com.oneclickaway.opensource.formvalidationsexample/_latestVersion)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9df707c7085c47979162af31e6406e66)](https://www.codacy.com/app/Drabu/FormValidator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Drabu/FormValidator&amp;utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FormValidator-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7649)
 
 Being an android developer you will come accoss forms where you need to make sure the user has filled all the fields. This gets very annoying if there are too many input fields as you need to check them each individually. Being an android developer i faced this issue so many times and no library came actually helped fixing this issue so i wrote one on my own.
 
