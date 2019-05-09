@@ -31,15 +31,12 @@ Add the dependency:
     dependencies {
     	   //check the version from the download badge above 
 		 implementation 'com.oneclickaway.opensource.formvalidationsexample:validation:x.x.x'
-		 
-		 
-		 //you need to have the following dependencies which are used to build this library
-		 implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-		 implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
-		 implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.31"
-		 implementation 'com.android.support:design:28.0.0'
-		 
 	 }
+
+
+# Important
+
+Since this library uses kotlin and  rxjava you need to have the [following](https://github.com/Drabu/FormValidator/blob/master/validation/build.gradle) dependencies in your build.gradle file 
 
 In case you have optional parameters : 
         
