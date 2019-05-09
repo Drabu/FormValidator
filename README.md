@@ -16,7 +16,6 @@ This library supports edit texts view and no custom view is requred. The Librara
 The library is written in kotlin and is build on top of RX Java and it provides methods for error handling as well. 
 
 Example is mentioned in the project:
-
 ### How it works
 
 <p align="center">
@@ -32,9 +31,7 @@ Add the dependency:
     	   //check the version from the download badge above 
 		 implementation 'com.oneclickaway.opensource.formvalidationsexample:validation:x.x.x'
 	 }
-
-# Important
-
+### Important
 Since this library uses kotlin and  rxjava you need to have the [following](https://github.com/Drabu/FormValidator/blob/master/validation/build.gradle) dependencies in your build.gradle file 
 
 Features
