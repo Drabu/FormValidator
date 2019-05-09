@@ -23,13 +23,13 @@ object FormValidator {
 
 
     private val TAG = javaClass.simpleName
-    private  var compositeDisposable  = CompositeDisposable()
+    private var compositeDisposable = CompositeDisposable()
 
     /*here we assume the form is filled*/
-    private  var isFormFilled = true
+    private var isFormFilled = true
 
 
-  private fun checkIfFieldLeftBlank(v: ViewGroup, oe: ObservableEmitter<View>, optionalParams: IntArray) {
+    private fun checkIfFieldLeftBlank(v: ViewGroup, oe: ObservableEmitter<View>, optionalParams: IntArray) {
         for (i in 0 until v.childCount) {
             if (v.getChildAt(i) is EditText) {
 
@@ -37,7 +37,7 @@ object FormValidator {
                     /*edit text is empty*/
                     oe.onNext(v.getChildAt(i))
                 }
-                Log.d(TAG , "Parent is Layout " + ((v.getChildAt(i) as? EditText )?.parent is TextInputLayout))
+                Log.d(TAG, "Parent is Layout " + ((v.getChildAt(i) as? EditText)?.parent is TextInputLayout))
             } else if (v.getChildAt(i) is ViewGroup) {
                 checkIfFieldLeftBlank((v.getChildAt(i) as? ViewGroup)!!, oe, optionalParams)
 
@@ -45,54 +45,56 @@ object FormValidator {
         }
     }
 
-  private fun eraseWhenStartedTyping(editText: EditText, message: String) {
+    private fun eraseWhenStartedTyping(editText: EditText, message: String) {
 
-            Log.i(TAG, "Text Watcher attached")
+        Log.i(TAG, "Text Watcher attached")
 
-            editText.addTextChangedListener(object : TextWatcher{
+        editText.addTextChangedListener(object : TextWatcher {
 
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-                    if (editText.text.toString().isEmpty()) {
-                        setErrorForTIL(true, editText,  message)
-                        Log.i(TAG, "Field is empty")
-                    }else {
-                        setErrorForTIL(false, editText,  message)
-                        Log.i(TAG, "Field has data")
-                    }
-                }
-            })
-
-        }
-
-  private fun setErrorForTIL(enabled  : Boolean, editText : EditText, message: String){
-
-            if (editText.parent is ViewGroup && (editText.parent as? ViewGroup)?.parent is TextInputLayout){
-                if (enabled){
-                    ( (editText.parent as? ViewGroup)?.parent as?  TextInputLayout )?.error = message
-                }else {
-                    ( (editText.parent as? ViewGroup)?.parent as?  TextInputLayout )?.isErrorEnabled = false
-                }
-
-            }else {
-
-                if (enabled){
-                    editText.error = message
-                }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (editText.text.toString().isEmpty()) {
+                    setErrorForTIL(true, editText, message)
+                    Log.i(TAG, "Field is empty")
+                } else {
+                    setErrorForTIL(false, editText, message)
+                    Log.i(TAG, "Field has data")
+                }
+            }
+        })
+
+    }
+
+    private fun setErrorForTIL(enabled: Boolean, editText: EditText, message: String) {
+
+        if (editText.parent is ViewGroup && (editText.parent as? ViewGroup)?.parent is TextInputLayout) {
+            if (enabled) {
+                ((editText.parent as? ViewGroup)?.parent as?  TextInputLayout)?.error = message
+            } else {
+                ((editText.parent as? ViewGroup)?.parent as?  TextInputLayout)?.isErrorEnabled = false
+            }
+
+        } else {
+
+            if (enabled) {
+                editText.error = message
+            }
         }
 
-  /*** @author buren* @since 07.07.17*/
-  fun clearFormValidator() { compositeDisposable.clear() }
+    }
 
-  /*** @author buren* @since 07.07.17*/
-  fun isFormFilled(viewGroup: ViewGroup, onFormValidationListener: OnResponseListener.OnFormValidationListener, message : String = "Required", errorEnabled : Boolean = true, optionalParams:IntArray = intArrayOf()){
+    /*** @author buren* @since 07.07.17*/
+    fun clearFormValidator() {
+        compositeDisposable.clear()
+    }
+
+    /*** @author buren* @since 07.07.17*/
+    fun isFormFilled(viewGroup: ViewGroup, onFormValidationListener: OnResponseListener.OnFormValidationListener, message: String = "Required", errorEnabled: Boolean = true, optionalParams: IntArray = intArrayOf()) {
 
 
         compositeDisposable.add(
@@ -115,8 +117,7 @@ object FormValidator {
     }
 
 
-
-    private fun  getObserver(onFormValidationListener: OnResponseListener.OnFormValidationListener, message : String, errorEnabled: Boolean )  : DisposableObserver<View>{
+    private fun getObserver(onFormValidationListener: OnResponseListener.OnFormValidationListener, message: String, errorEnabled: Boolean): DisposableObserver<View> {
 
         return object : DisposableObserver<View>() {
             override fun onComplete() {
@@ -127,22 +128,22 @@ object FormValidator {
                 setError(view)
             }
 
-            private fun setError(view :View) {
+            private fun setError(view: View) {
 
                 /*since we have an empty filed so our assumption was wrong*/
-                isFormFilled  = false
+                isFormFilled = false
 
-                if ( errorEnabled ) {
+                if (errorEnabled) {
 
-                    if ( view.parent is ViewGroup ){
-                        if ( (view.parent as? ViewGroup)?.parent is  TextInputLayout) {
+                    if (view.parent is ViewGroup) {
+                        if ((view.parent as? ViewGroup)?.parent is TextInputLayout) {
                             eraseWhenStartedTyping((view as? EditText)!!, message)
-                            setErrorForTIL(true, view , message)
-                        }else {
+                            setErrorForTIL(true, view, message)
+                        } else {
                             (view as? EditText)?.error = message
                         }
 
-                    }else {
+                    } else {
                         (view as? EditText)?.error = message
                     }
 
