@@ -5,6 +5,7 @@ Easily Valdiate forms in android
 [ ![Download](https://api.bintray.com/packages/drabu/FormValidator/com.oneclickaway.opensource.formvalidationsexample/images/download.svg) ](https://bintray.com/drabu/FormValidator/com.oneclickaway.opensource.formvalidationsexample/_latestVersion)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9df707c7085c47979162af31e6406e66)](https://www.codacy.com/app/Drabu/FormValidator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Drabu/FormValidator&amp;utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FormValidator-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7649)
 
 Being an android developer you will come accoss forms where you need to make sure the user has filled all the fields. This gets very annoying if there are too many input fields as you need to check them each individually. Being an android developer i faced this issue so many times and no library came actually helped fixing this issue so i wrote one on my own.
 
@@ -15,7 +16,6 @@ This library supports edit texts view and no custom view is requred. The Librara
 The library is written in kotlin and is build on top of RX Java and it provides methods for error handling as well. 
 
 Example is mentioned in the project:
-
 ### How it works
 
 <p align="center">
@@ -31,9 +31,21 @@ Add the dependency:
     	   //check the version from the download badge above 
 		 implementation 'com.oneclickaway.opensource.formvalidationsexample:validation:x.x.x'
 	 }
+### Important
+Since this library uses kotlin and  rxjava you need to have the [following](https://github.com/Drabu/FormValidator/blob/master/validation/build.gradle) dependencies in your build.gradle file 
 
+Features
+-----
+Validates form without the hasle of refering to each edit text and checking each input box.
+
+Can auto detect EditText with text input layouts and set errors if enabled.
+
+Can skip optional values if you have any.
+
+Usage
+-----
 In case you have optional parameters : 
-        
+       
  	val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
 	FormValidator.isFormFilled( optionalParams = optionalInput, onResponseListener = this,
 	viewGroup = mainLinearLayoutLL)
@@ -99,12 +111,7 @@ You can show your custom error message:
 
     }
    
-Usage
------
--Minimum sdk 15
--Validates form without the hasle of refering to each edit text and checking each input box.
--Can set errors if enabled
--Can skip optional values if you have any..
+
 
 License
 -----
