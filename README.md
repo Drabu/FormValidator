@@ -33,13 +33,22 @@ Add the dependency:
 		 implementation 'com.oneclickaway.opensource.formvalidationsexample:validation:x.x.x'
 	 }
 
-
 # Important
 
 Since this library uses kotlin and  rxjava you need to have the [following](https://github.com/Drabu/FormValidator/blob/master/validation/build.gradle) dependencies in your build.gradle file 
 
+Features
+-----
+Validates form without the hasle of refering to each edit text and checking each input box.
+
+Can auto detect EditText with text input layouts and set errors if enabled.
+
+Can skip optional values if you have any.
+
+Usage
+-----
 In case you have optional parameters : 
-        
+       
  	val optionalInput = intArrayOf(R.id.optionalFirstET, R.id.optionalSecondET)
 	FormValidator.isFormFilled( optionalParams = optionalInput, onResponseListener = this,
 	viewGroup = mainLinearLayoutLL)
@@ -105,12 +114,7 @@ You can show your custom error message:
 
     }
    
-Usage
------
--Minimum sdk 15
--Validates form without the hasle of refering to each edit text and checking each input box.
--Can set errors if enabled
--Can skip optional values if you have any..
+
 
 License
 -----
